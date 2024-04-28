@@ -29,10 +29,10 @@ for sound_type in sound_types:
         temprename = os.fsdecode(spec_file)
         if temprename.endswith(".temprename"):
             
-            filename = os.splitext(temprename)[0]
+            filename = os.path.splitext(temprename)[0]
 
-            if filename.endswith(".wav") or filename.endswith(".mp3") or filename.endwith(".flac"):
-                ext = os.path.splitext(filename)[1]
+            if filename.endswith(".wav") or filename.endswith(".mp3") or filename.endswith(".flac"):
+                extension = os.path.splitext(filename)[1]
                 os.rename(os.path.join(sound_dir, os.fsencode(temprename)), os.path.join(sound_dir, os.fsencode(sound_type + "_" + str(i).zfill(3) + extension)))
                 
     
