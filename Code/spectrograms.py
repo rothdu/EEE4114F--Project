@@ -3,24 +3,16 @@ import numpy as np
 from scipy.signal import square, ShortTimeFFT
 from scipy.signal.windows import gaussian
 from scipy.io import wavfile
-
-
 fs, data = wavfile.read("Sounds/Snares/1.wav")
-
 x = data
-
 T_x, N = 1 / fs, len(x)  # 20 Hz sampling rate for 50 s signal
-
 t_x = np.arange(N) * T_x  # time indexes for signal
-
-
 g_std = 200  # standard deviation for Gaussian window in samples
-
 win = gaussian(1000, std=g_std, sym=True)  # symmetric Gaussian wind.
-
 SFT = ShortTimeFFT(win, hop=200, fs=fs, mfft=16000, scale_to='psd')
-
 Sx2 = SFT.spectrogram(x)  # calculate absolute square of STFT
+
+
 
 # The rest is just plotting the spectrogram - we may not need to do this
 
