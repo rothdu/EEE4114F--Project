@@ -1,0 +1,19 @@
+To assess:
+
+Spectrograms (rectangular window)
++ hanning
++ blackman
+(grayscale)
+
+MFCCs
+(colour)
+
+Deeper learning model (cnn)
+Shallower learning model
+Ann - MFCC only
+
+Hyperparameter tuning on the best model
+
+Validation loss vs training loss
+
+
