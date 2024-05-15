@@ -17,6 +17,10 @@
 
 Here we tested ... 
 
+In order to validate the performance of the model, k-fold cross-validation was used. It tests the robustness of the model against unseen data. This is done by repeatedly training and testing the model with different subsets of the given data. This reduces overfitting. The data is used very efficiently, which is useful here since the dataset is so small, by making sure that each data point is included in the test set once and the training set k-1 times. 
+
+The validation method also gives an accurate method on the performance evaluation, since the average performance in k iterations is good enough to assess the models performance on new data. 
+
 
 % ----------------------------------------------------
 % \ifstandalone
