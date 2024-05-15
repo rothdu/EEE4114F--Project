@@ -2,7 +2,7 @@ import os
 
 # Create arrays of ground truth data
 
-sound_types = ["Snare", "Trumpet", "Violin"]
+sound_types = ["Piano"]
 
 data = []
 
@@ -10,7 +10,7 @@ for sound_type in sound_types:
 
     # establish output directories
     # TODO: Add checks that directorties exist
-    sound_dir = os.fsencode("Sounds/" + sound_type)
+    sound_dir = os.fsencode(sound_type)
     
     # remove all existing spectrograms
     for i, spec_file in  enumerate(os.listdir(sound_dir)):
