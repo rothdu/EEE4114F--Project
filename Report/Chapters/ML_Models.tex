@@ -15,9 +15,11 @@
 \vspace{0.5cm}
 % ----------------------------------------------------
 
+The Artificial Neural Network (ANN) is a computational model that works similarly to the human brain. How it works is that there are numerous connected nodes that each perform a mathematical operation, which affects the respective output. By connecting the nodes together and setting their respective parameters, complex functions can be computed. The ANN requires lots of data since it learns from previous experiences, being able to derive complex relationships between data that to us humans have little to no correlation between sets. Looking at the sound datasets, the ability of an ANN to easily derive non-linear relationships between data could be valuable. 
+
 The Convolution Neural Network (CNN) is a artificial neural network that is very effective when working with grid data, i.e., 2D arrays. CNNs are built to adapt automatically to the features of the input data, making it very versatile. This is particularly useful in instrument classification since trying to extract features from data was proving to be time inefficient. When dealing with spectrograms, the CNN is very good at handling both time and frequency components simultaneously to analyse patterns and structures which are useful in classification. 
 
-In section \ref{ss: MLCM}, various ML models were looked at, however the one that stood out as being the best suited for this project is the CNN. Shreevathsa et al. verified this when performing a similar task to this and compared both ANN and CNN to one another. CNN worked far better in audio classification, outperforming the ANN. The ANN had its advantages, being much faster to test and train relative to the CNN. 
+In section \ref{ss: MLCM}, various ML models were looked at, however the one that stood out as being the best suited for this project is the CNN. Shreevathsa et al. verified this when performing a similar task to this and compared both ANN and CNN to one another. CNN worked far better in audio classification, outperforming the ANN. The ANN had its advantages, being much faster to test and train relative to the CNN. With this in mind, both an ANN and CNN was implemented. The study also used MFCCs, which were described in detail in section \ref{ch:Feature_Extraction}. 
 
 
 % ----------------------------------------------------
