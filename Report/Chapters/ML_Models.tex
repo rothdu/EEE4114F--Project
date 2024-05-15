@@ -1,0 +1,29 @@
+% ----------------------------------------------------
+% Literature Review
+% ----------------------------------------------------
+% \documentclass[class=report,11pt,crop=false]{standalone}
+% \input{../Style/ChapterStyle.tex}
+% \input{../FrontMatter/Glossary.tex}
+% \begin{document}
+% \ifstandalone
+% \tableofcontents
+% \fi
+% % ----------------------------------------------------
+\section{Machine Learning Classification Methods \label{ch:ML_Methods}}
+% \epigraph{If you wish to make an apple pie from scratch, you must first invent the universe.}%
+%     {\emph{---Carl Sagan}}
+\vspace{0.5cm}
+% ----------------------------------------------------
+
+The Convolution Neural Network (CNN) is a artificial neural network that is very effective when working with grid data, i.e., 2D arrays. CNNs are built to adapt automatically to the features of the input data, making it very versatile. This is particularly useful in instrument classification since trying to extract features from data was proving to be time inefficient. When dealing with spectrograms, the CNN is very good at handling both time and frequency components simultaneously to analyse patterns and structures which are useful in classification. 
+
+In section \ref{ss: MLCM}, various ML models were looked at, however the one that stood out as being the best suited for this project is the CNN. Shreevathsa et al. verified this when performing a similar task to this and compared both ANN and CNN to one another. CNN worked far better in audio classification, outperforming the ANN. The ANN had its advantages, being much faster to test and train relative to the CNN. 
+
+
+% ----------------------------------------------------
+% \ifstandalone
+% \bibliography{../Bibliography/References.bib}
+% \printnoidxglossary[type=\acronymtype,nonumberlist]
+% \fi
+% \end{document}
+% ----------------------------------------------------

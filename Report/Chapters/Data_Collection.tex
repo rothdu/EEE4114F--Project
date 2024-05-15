@@ -1,0 +1,29 @@
+% ----------------------------------------------------
+% Literature Review
+% ----------------------------------------------------
+% \documentclass[class=report,11pt,crop=false]{standalone}
+% \input{../Style/ChapterStyle.tex}
+% \input{../FrontMatter/Glossary.tex}
+% \begin{document}
+% \ifstandalone
+% \tableofcontents
+% \fi
+% % ----------------------------------------------------
+\section{Data Collection \label{ch: data_collection}}
+% \epigraph{If you wish to make an apple pie from scratch, you must first invent the universe.}%
+%     {\emph{---Carl Sagan}}
+\vspace{0.5cm}
+% ----------------------------------------------------
+
+As stated previously, four instruments were selected to train the model. For the Snare, Trumpet, and Violin, Sound clips were collected from freesound.org and pixabay.com, which house massive libraries of royalty free music. It is very important to collect a variety of datasets that are unfiltered to resemble real-world applications. With this in mind, the piano sound files were collected by recording short songs played on an actual piano. 
+
+70 samples were collected for each instrument, where the data for each instrument is initially split into 80\% training and 20\% test data, with the training data further split into 80\% training and 20\% validation data. Finally, a .csv file of two columns were created for the filename of the sound clip and the instrument it belongs to to aid in the process of supervised learning. 
+
+
+% ----------------------------------------------------
+% \ifstandalone
+% \bibliography{../Bibliography/References.bib}
+% \printnoidxglossary[type=\acronymtype,nonumberlist]
+% \fi
+% \end{document}
+% ----------------------------------------------------

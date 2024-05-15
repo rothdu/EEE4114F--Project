@@ -1,0 +1,35 @@
+% ----------------------------------------------------
+% Literature Review
+% ----------------------------------------------------
+% \documentclass[class=report,11pt,crop=false]{standalone}
+% \input{../Style/ChapterStyle.tex}
+% \input{../FrontMatter/Glossary.tex}
+% \begin{document}
+% \ifstandalone
+% \tableofcontents
+% \fi
+% % ----------------------------------------------------
+\section{Feature Extraction \label{ch:Feature_Extraction}}
+% \epigraph{If you wish to make an apple pie from scratch, you must first invent the universe.}%
+%     {\emph{---Carl Sagan}}
+\vspace{0.5cm}
+% ----------------------------------------------------
+
+Feature extraction is important when it comes to finding relations between different aspects of data, specifically in classification tasks. The data contained in audio files cannot be understood by Machine Learning Models in its raw form. This is where feature extraction comes in. The data can be converted into an understandable format that the ML model can interact with. 
+
+Spectrograms are widely used in audio classification tasks, since it is the representation of the sound as an image, specifically the variation in frequencies over time. The dataset contained soundclips of varying length, which meant that when the resulting spectrograms were produced, each one had a different pixel count. When training an ML model, it is good practice to make sure that each spectrogram has the same number of pixels, i.e., input features. To resolve this, spectrogram were found over a one-second interval of the signal that contained the highest RMS value. The reason for finding the interval with the highest RMS energy was to elimate the chances of taking the spectrogram of noise, since there were some soundclips where the instrument only started playing after 1 second. 
+
+The one-second interval of each sound clip being analysed is not necessarily periodic. This could lead to spectral leakage when performing the Short-Time Fourier Transform (STFT) on the sounds. In the spectrogram this would be seen as distortion. To solve this, windowing was used. There are a number of windowing functions that could be used, ranging from a simple rectangular window to a more complex Blackman window. Choosing the correct windowing method was tricky. Each option offers a trade-off between the frequency resolution and leakage. While a Blackman window offers better leakage, the frequency resolution was compromised. Conversely, rectangular windows offer great frequency resolution but bad leakage. The two windows that offer the best balance between trade-offs is the Hann window ad Hamming window, since they offer moderate frequency resolution and leakage. To assess the effect that frequency resolution and leakage have on the performance of the ML model, rectangular, Hann, and Blackman windows were used. 
+
+Other methods of feature extraction were also investigated. In section \ref{ss: FE}, Mel-Frequency Cepstral Coefficients (MFCCs) was regarded as being very useful for this task. The Librosa library in python is very useful in computing these features for each sound clip.  
+
+MFCCs give a small set of features, in our case around 20, that describe the shape of the spectral envelope. MFCC is also described as a way to view the power spectrum of a signal similar to how a human auditory system would perceive it. The MFCC was computed over a short window and resulted in a 2D matrix that consists of features. This matrix can then be plotted as a heatmap. The resulting images were then stored to be used later when the learning model will be implemented. No windowing methods were used here. 
+
+
+% ----------------------------------------------------
+% \ifstandalone
+% \bibliography{../Bibliography/References.bib}
+% \printnoidxglossary[type=\acronymtype,nonumberlist]
+% \fi
+% \end{document}
+% ----------------------------------------------------
