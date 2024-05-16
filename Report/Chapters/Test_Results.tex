@@ -15,7 +15,7 @@
 
 
 
-\subsection{Is the model performance better if MFCCs are used as input features?}
+
 
 
 \subsection{Comparing depth of neural networks}
@@ -75,24 +75,11 @@ A limitation of this comparison came from the splitting of data; the single trai
 \subsection{Comparing windowing types}
 
 
+Shallow CNNs, which are far more computationally efficient, have room for improvement when it comes to accuracy. K-fold cross-validation is a is very powerful when it comes to assessing the model's performance on unseen data. The dataset is divided into 'k' subsets referred to as folds. The model is trained 'k' times and uses 'k-1' folds for training and '1' fold for validation. This would provide a more comprehensive result on the model performance. 
 
+By applying this to the shallow CNN trained with the data processed with various windowing methods, it provides a guide as to which model parameters to tune to improve performance. 
 
-
-
-
-Bearing in mind that the rectangle and Blackman window have the worst and best attenuation of spectral leakage respectively, Table \ref{tab:Mean_Acc} shows that degree of spectral leakage attenuation affects the performance of shallower CNNs. The CNN model that is trained on the data that was processed with the rectangular window had poorer performance in comparison to the same data processed with Blackman and Hann windows. This shows a direct link between spectral leakage and the model accuracy. The models trained with data that was processed with the Blackman and Hann windows performed with the same accuracy. This was expected since both windows are great in limiting spectral leakage, and reducing the variability of the model. 
-
-
-
-
-
-Shallow CNNs, which are far more computationally efficient and require fewer iterations to become perfectly fit, still has room for improvement, specifically when it comes to the performance of the model on unseen data. This is why k-fold cross-validation is used. 
-
-K-fold cross-validation is a is very powerful when it comes to assessing the model's performance on unseen data. The dataset is divided into 'k' subsets referred to as folds. The model is trained 'k' times and uses 'k-1' folds for training and '1' fold for validation. This would provide a more comprehensive result on the model performance. 
-
-By applying this to the shallow CNN trained with the data processed with various windowing methods, it provides a guide as to which model parameters to tune. 
-
-Figure \ref{fig:K-Fold} shows the mean, min and standard deviation of the k-fold window type analysis. Table \ref{tab:k-fold-average} then gives the accuracy of the last 5 k-fold iterations. 
+Figure \ref{fig:K-Fold} shows the mean, min and standard deviation of the k-fold window type analysis. Table \ref{tab:k-fold-average} then gives the accuracy of the last 5 k-fold iterations.
 
 \begin{figure}[hbt!]
     \begin{subfigure}[b]{0.5\textwidth}
@@ -115,14 +102,14 @@ Figure \ref{fig:K-Fold} shows the mean, min and standard deviation of the k-fold
     \caption{Graphical Representation of K-Fold Cross Validation Results}
     \label{fig:K-Fold}
 \end{figure}
- 
+
 \begin{table}[h]
 \centering
 \begin{tabular}{|l|l|}
 \hline
 \textbf{Window} & \textbf{k-fold accuracies (\%)} \\
 \hline
-Rectangle & [78.9 83.8 83.77.2 76.4 72.3] \\
+Rectangle & [78.9 83.8 83.8 76.4 72.3] \\
 Blackman & [63.1 77.2 64.0 82.6 67.4] \\
 Hann & [69.3 78.7 70.9 73.9 77.9] \\
 \hline
@@ -131,9 +118,13 @@ Hann & [69.3 78.7 70.9 73.9 77.9] \\
 \label{tab:k-fold-average}
 \end{table}
 
-Figures \ref{fig:KMean} and \ref{fig:KMin} shows that the model trained with data processed with the rectangular window had the highest average accuracy in comparison to the data processed with the Blackman and Hann windows. Although, the data processed with the Hann window was not far off comparison. The model trained with data processed with the Blackman window did not perform as well as it was expected to. This shows that the higher frequency resolution associated with rectangular windows had an effect on the performance of shallow CNNs. The features extracted could likely be less affected by spectral leakage. 
+Bearing in mind that the rectangle and Blackman window have the worst and best attenuation of spectral leakage respectively, figure \ref{fig:KMean} shows that the model trained with data processed with the rectangular window had the highest average accuracy in comparison to the data processed with the Blackman and Hann windows. Although, the data processed with the Hann window was not far off comparison. The model trained with data processed with the Blackman window did not perform as well as it was expected to. This shows that the higher frequency resolution associated with rectangular windows had an effect on the performance of shallow CNNs. The features extracted could likely be less affected by spectral leakage.
 
-Figure \ref{fig:KStd} told a completely different story. Even though the model trained with data processed with the rectangular window had the best overall accuracy, the variability was the the highest, looking at the region of model iterations between 50 and 100. The other models had less variability. 
+Figure \ref{fig:KMin} shows the worst case accuracy across each model iteration, and whats interesting is that the model trained on the data processed with the rectangle window still prevails as the best performing of the three. The model trained on the data processed with the Hann window could be regarded as the worst of the three. 
+
+Figure \ref{fig:KStd} shows that the model trained on the data processed with the rectangular window has the lowest variation of the  three models. This means that for the current configuration of the model, frequency resolution is valued above the spectral leakage, proving that using a rectangular window is the best. 
+
+Table \ref{tab:k-fold-average} illustrates the above mentioned conclusion numerically. The average accuracies obtained from the model trained on the data processed with the rectangular window significantly outperformed the other two models in the table. 
 
 % ----------------------------------------------------
 \ifstandalone

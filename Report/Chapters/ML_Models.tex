@@ -16,7 +16,7 @@
 
 % The Convolution Neural Network (CNN) is a artificial neural network that is very effective when working with grid data, i.e., 2D arrays. CNNs are built to adapt automatically to the features of the input data, making it very versatile. This is particularly useful in instrument classification since trying to extract features from data was proving to be time inefficient. When dealing with spectrograms, the CNN is very good at handling both time and frequency components simultaneously to analyse patterns and structures which are useful in classification. 
 
-In section \ref{ss: MLCM}, various ML models were looked at, however the one that stood out as being the best suited for this project was the CNN. Shreevathsa et al. verified the CNN performance in a comparative study between the ANN and CNN. The ultimate conclusion was that the CNN worked far better in audio classification, outperforming the ANN. 
+In section \ref{ss: MLCM}, various ML models were looked at, however the one that stood out as being the best suited for this project was the CNN. Shreevathsa et al. \cite{Shreevathsa_2020} verified the CNN performance in a comparative study between the ANN and CNN. The ultimate conclusion was that the CNN worked far better in audio classification, outperforming the ANN. 
 
 Rather than comparing the performance between the ANN and CNN when changing the input features, it was deemed more insightful to analyse the model performance between a shallow and deeper neural network. This was tested by feeding both neural networks with spectrograms with different windowing methods applied and MFCCs with no windowing, as desribed in section \ref{ch:Feature_Extraction}. 
 
