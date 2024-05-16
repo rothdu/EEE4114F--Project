@@ -18,11 +18,12 @@
 In sections \ref{ch:Feature_Extraction} and \ref{ch:ML_Methods}, a general hypothesis was outlines regarding the specific questions that should be answered in section \ref{ch:T_R}. 
 
 \begin{itemize}
-    \item How significant is the effect of spectral leakage on the performance of the model? Since the different windowing methods attenuate the spectral leakage to different degrees, perhaps frequency resolution could be seen as irrelevant, with a need to prioritise spectral leakage.
-    \item Does the depth of the neural network affect the model performance when spectrograms of different windowing methods are applied? A deeper algorithm is often more complex and tunes the parameters finer which could result in overfitting, while a simpler algorithm would be more computationally efficient but would perform poorly in comparison to a deeper algorithm. 
-    \item Is the model performance of both the shallow and deeper neural network better if the MFCCs are used as input features in comparison to the spectrogram with the overall best windowing method applied? MFCCs were seen to have a lower pixel count (20x94) than spectrograms. 
+    \item Does the depth of the neural network affect the model performance? This was analysed by comparing the networks on the three types of spectrograms with different windowing methods.
+    \item How significant is the effect of spectral leakage on the performance of the model? This was analysed by comparing the three types of spectrograms on the `shallow' network.
+    \item What is the performance of MFCCs on different networks? 
 \end{itemize}
 
+Apart from the described changes to the MFCC network, hyperparameter tuning for the models was considered beyond the scope of the investigation. Most models discussed could likely be improved with hyperparameter tuning, and similarly could be improved with a larger dataset.
 
 % ----------------------------------------------------
 % \ifstandalone

@@ -1,35 +1,30 @@
 % ----------------------------------------------------
 % Literature Review
 % ----------------------------------------------------
-% \documentclass[class=report,11pt,crop=false]{standalone}
-% \input{../Style/ChapterStyle.tex}
-% \input{../FrontMatter/Glossary.tex}
-% \begin{document}
-% \ifstandalone
-% \tableofcontents
-% \fi
+\documentclass[class=report,11pt,crop=false]{standalone}
+\input{../Style/ChapterStyle.tex}
+\input{../FrontMatter/Glossary.tex}
+\begin{document}
+\ifstandalone
+\tableofcontents
+\fi
 % % ----------------------------------------------------
 \section{Feature Extraction \label{ch:Feature_Extraction}}
-% \epigraph{If you wish to make an apple pie from scratch, you must first invent the universe.}%
-%     {\emph{---Carl Sagan}}
-\vspace{0.5cm}
 % ----------------------------------------------------
 
-Feature extraction was important in identifying relationships between different portions of the data, which improved the accuracy of our classification task. The data contained in audio files cannot be understood by Machine Learning Models in its raw form. This was why feature extraction was needed. The data was converted into an understandable format that the ML model could interact with. 
+Feature extraction was important in identifying relationships between different portions of the data, which improved the accuracy of our classification task. The data contained in audio files is often difficult to use in ML algorithms in its raw form. This was why feature extraction was needed. The data was converted into an understandable format that the ML model could interact with. 
 
-Spectrograms were chosen for this task. They are widely used in audio classification tasks, it is a representation of the sound as an image. The dataset contained soundclips of varying length, which mean that any spectrograms produced from this data would not have a uniform pixel count. This would not work since it is good practice to keep the input features to an ML model constant. To guarantee uniformity in pixel count, The spectrograms were generated over a one-second interval of the signal which contained the highest RMS value. This eliminated the chances of taking the spectrogram of noise, especially for soundclips where the instrument only started playing after 1 second. 
+Spectrograms were the primary tool chosen for this task. Spectrograms visusally represent the frequency content of a signal over time, and are widely used in audio classification tasks. The dataset contained soundclips of varying length, which meant that spectrograms produced from this data would not have a uniform pixel count. This would not work since it is good practice to keep the input features to an ML model constant. To guarantee uniformity in pixel count, The spectrograms were generated over a one-second interval of the signal which contained the highest energy (calculated using RMS signal strength). This ensured that the spectrogram was taken for a portion of the signal where the instruments was actually playing. Spectrograms were scaled to the power spectral density of the signal and displayed, ensuring that signals of differing volumes still produced useable data. A decibel scale was used, amplifying small differences between the spectral content of the signals.
 
-Upon analysing the spectrograms, it was clear that the sounds may not be periodic over the interval they are being analysed. This would lead to spectral leakage when performing the Short-Time Fourier Transform (STFT) on the sounds. This would be seen as distortion in the spectrogram. While not noticeable to the human eye, to an ML model this would be significant. Windowing was used to try and reduce spectral leakage. The options for windowing functions ranged from a simple rectangular window to a more complex Blackman window. Choosing the correct windowing method could prove to be tricky. It heavily depends on the inherent characteristics of the ML model being used. While a Blackman window offered better leakage, the frequency resolution was compromised. Conversely, rectangular windows offered great frequency resolution but bad leakage. The window which offered the best balance between trade-offs was the Hann window, with moderate frequency resolution and leakage. These three windows were chosen to be applied to the signals. It was interesting to see how the different windowing methods affect model performance of both shallow and deeper neural networks, and whether limiting spectral leakage was more important than frequency resolution. 
+A common problem with spectrograms is spectral leakage when performing the Short-Time Fourier Transform (STFT) on the sounds. This would be seen as distortion in the spectrogram. While not always noticeable to the human eye, to an ML model this could be significant. Windowing was used to try and reduce spectral leakage. The options for windowing functions ranged from a simple rectangular window to more complex Blackman and Hann windows. Choosing the correct windowing method could prove to be tricky. It heavily depends on the inherent characteristics of the ML model being used. While a Blackman window offered better leakage, the frequency resolution was compromised. Conversely, rectangular windows offered great frequency resolution but bad leakage. The window which offered the best balance between trade-offs was the Hann window, with moderate frequency resolution and leakage. An analysis of the ML models using these three windows for feature extraction was performed.
 
-Other methods of feature extraction were also investigated. In section \ref{ss: FE}, Mel-Frequency Cepstral Coefficients (MFCCs) was regarded as being very useful for this task. The Librosa library in python is very useful in computing these features for each sound clip.  
-
-MFCCs gave a small set of features, in our case around 20, that described the shape of the spectral envelope. MFCC was also described as a way to view the power spectrum of a signal similar to how a human auditory system would perceive it. The MFCC was computed over a short window and resulted in a 2D matrix that consists of features. This matrix can then be plotted as a heatmap. The resulting images were then stored to be used later when the learning model will be implemented. No windowing methods were used here, and each MFCC is calculated over the one-second interval of the signal which contained the highest RMS value. Given that the features were more distinct, it was interesting to view the model performance when using MFCCs as the input as oppose to spectrograms with the overall best windowing methods applied. 
+In section \ref{ss: FE}, (MFCCs) were regarded as being very useful for classification of sounds; these were also duly investigated. MFCCs give a small set of features, in our case around 20, that describe the shape of the spectral envelope. MFCCs were also described as a way to view the power spectrum of a signal similar to how a human auditory system would perceive it. The MFCC was computed over a short window and resulted in a 2D matrix that consists of features. This matrix can then be plotted as a heatmap. The resulting images were then stored to be used later when the learning model will be implemented. No windowing methods were used here, and as with the spectrograms, each MFCC was calculated over the one-second interval of the signal which contained the highest RMS value. Given that the features were more distinct, it was interesting to view the model performance when using MFCCs as the input as oppose to spectrograms with the overall best windowing methods applied. 
 
 
 % ----------------------------------------------------
-% \ifstandalone
-% \bibliography{../Bibliography/References.bib}
-% \printnoidxglossary[type=\acronymtype,nonumberlist]
-% \fi
-% \end{document}
+\ifstandalone
+\bibliography{../Bibliography/References.bib}
+\printnoidxglossary[type=\acronymtype,nonumberlist]
+\fi
+\end{document}
 % ----------------------------------------------------
