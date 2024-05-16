@@ -20,7 +20,7 @@
 
 \subsection{Comparing depth of neural networks} \label{ss:networkdepths}
 
-As discussed in section \ref{ch:Feature_Extraction}, A set of spectrograms were generated when each windowing method was applied to the datasets. In total there were three sets of spectrograms. Each set of spectrograms was passed through a shallow and deeper CNN, with the data shown in figure \ref{fig:SpecCNN}.
+As discussed in section \ref{ch:Feature_Extraction}, a set of spectrograms were generated when each windowing method was applied to the datasets. In total there were three sets of spectrograms. Each set of spectrograms was passed through a shallow and deeper CNN, with the data shown in figure \ref{fig:SpecCNN}.
 
 \begin{figure}[hbt!]
     \begin{subfigure}[b]{0.5\textwidth}
@@ -58,15 +58,15 @@ As discussed in section \ref{ch:Feature_Extraction}, A set of spectrograms were 
         \caption{Blackman filter applied to data passed through a deeper CNN}
         \label{fig:BlackmanDeeper}
     \end{subfigure}
-    \caption{Result after Spectrograms were passed through neural networks of variable depth}
+    \caption{Result after Spectrograms were passed through CNNs of variable depth}
     \label{fig:SpecCNN}
 \end{figure}
 
-The graphs show the training and validation losses as the number of model iterations increase. Each model was trainged for 25 epochs (amounting to just over 350 iterations with batch sizes of 16). Models were trained at a learning rate of 0.0002, after experimentation revealed that gave relatively stable results. Models were trained on a single random split of the training data into 80\% training data and 20\% validation data.
+The graphs show the training and validation losses as the number of model iterations increase. Each model was trainged for 25 epochs (amounting to just over 350 iterations with batch sizes of 16). Models were trained at a learning rate of 0.0002, after experimentation revealed that said learning rate gave relatively stable results. Models were trained on a single random split of the training data into 80\% training data and 20\% validation data.
 
-The clear result from all three windowing methods is that the more complex model tends to overfit to the data more heavily within the number of iterations trained. Deeper networks have increased complexity and more features, making it possible for them to fit more finely to the training data; however, this can have the side effect of overfitting on the training data and poor validation performance. Deeper neural networks are also more likely to experience problems relating to vanishing and exploding gradient. This tends to happens to gradients when they are passed through multiple layers of learning during the training process, slowing it down.
+The clear result from all three windowing methods is that the more complex model tends to overfit to the data more heavily within the number of iterations trained. Deeper networks have increased complexity and more features, making it possible for them to fit more finely to the training data; however, this can have the side effect of overfitting on the training data and poor validation performance. Deeper neural networks are also more likely to experience problems relating to vanishing and exploding gradients. This tends to happens to gradients when they are passed through multiple layers of learning during the training process, slowing it down.
 
-The best-case validation performance for the `shallow' network is better than that of the `deeper' network for both the rectangular and Blackman windows, and is comparable for the Hann window. Training a deeper neural network in general should take longer to train due to more parameters having to be learnt, since the deeper networks have more layers where the learning process involves an interative process of adjusting the the learning parameters in an attempt to improve model accuracy, as well as increased complexity. Overall, the added computational requirements of the `deeper' network cannot be justified.
+The best-case validation performance for the `shallow' network is better than that of the `deeper' network for both the rectangular and Blackman windows, and is comparable for the Hann window. Training a deeper neural network in general should take longer to train due to more parameters having to be learnt, since the deeper networks have more layers where the learning process involves an interative process of adjusting the the learning parameters in an attempt to improve model accuracy. Overall, the added computational requirements of the `deeper' network cannot be justified.
 
 A limitation of this comparison came from the splitting of data; the single training-validation split could yield results that are overly dependent on the specific split of data. Across the three window types, the conclusion that the simple model is more useful can still be deemed valid, but a meaningful evaluation of the difference between the window types cannot be made from this data.
 
@@ -75,9 +75,7 @@ A limitation of this comparison came from the splitting of data; the single trai
 \subsection{Comparing windowing types} \label{ss:windowtypes}
 
 
-Shallow CNNs, which are far more computationally efficient, have room for improvement when it comes to accuracy. K-fold cross-validation is a is very powerful when it comes to assessing the model's performance on unseen data. The dataset is divided into 'k' subsets referred to as folds. The model is trained 'k' times and uses 'k-1' folds for training and '1' fold for validation. This would provide a more comprehensive result on the model performance. 
-
-By applying this to the shallow CNN trained with the data processed with various windowing methods, it provides a guide as to which model parameters to tune to improve performance. 
+Shallow CNNs, which are far more computationally efficient, have room for improvement when it comes to accuracy. K-fold cross-validation is a is very powerful when it comes to assessing the model's performance on unseen data. The dataset is divided into $k$ subsets referred to as folds. The model is trained $k$ times and uses $k-1$ folds for training and $1$ fold for validation. This would provide a more comprehensive result on the model performance. 
 
 Figure \ref{fig:K-Fold} shows the mean, min and standard deviation of the k-fold window type analysis. Table \ref{tab:k-fold-average} then gives the accuracy of the last 5 k-fold iterations.
 
@@ -118,7 +116,7 @@ Hann & [69.3 78.7 70.9 73.9 77.9] \\
 \label{tab:k-fold-average}
 \end{table}
 
-Bearing in mind that the rectangle and Blackman window have the worst and best attenuation of spectral leakage respectively, figure \ref{fig:KMean} shows that the model trained with data processed with the rectangular window had the highest average accuracy in comparison to the data processed with the Blackman and Hann windows. Although, the data processed with the Hann window was not far off comparison. The model trained with data processed with the Blackman window did not perform as well as it was expected to. This shows that the higher frequency resolution associated with rectangular windows had an effect on the performance of shallow CNNs. The features extracted could likely be less affected by spectral leakage.
+Bearing in mind that the rectangle and Blackman window have the worst and best attenuation of spectral leakage respectively, figure \ref{fig:KMean} shows that the model trained with data processed with the rectangular window had the highest average accuracy in comparison to the data processed with the Blackman and Hann windows, although the data processed with the Hann window was not far off comparison. The model trained with data processed with the Blackman window did not perform as well as it was expected to. This shows that the higher frequency resolution associated with rectangular windows had an effect on the performance of shallow CNNs. The features extracted could likely be less affected by spectral leakage.
 
 Figure \ref{fig:KMin} shows the worst case accuracy across each model iteration, and whats interesting is that the model trained on the data processed with the rectangle window still prevails as the best performing of the three. The model trained on the data processed with the Hann window could be regarded as the worst of the three. 
 

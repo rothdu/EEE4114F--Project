@@ -16,7 +16,7 @@ The purpose of this task was to construct an ML model for instrument classificat
 
 In testing, the deeper neural network tended to overfit the data more frequently, which is why a shallower neural network was preferred, despite yielding a lower model accuracy. With regards to the various windowing methods, the model trained with data processed with a rectangular window proved to be the best, which implied that the neural network was more sensitive to frequency resolution over spectral leakage. MFCCs were briefly examined, including being trained on a custom CNN using a horizontal kernel. Though the horizontal kernel did appear to yield better results, the overall performance of the MFCCs was comparable to that of the spectrograms.
 
-Given these conclusions, the model was retrained on all the training data, and evaluated on the test data to gain a concrete idea of the model's real-world performance. The final model accuracy was quoted at 74.2\%. Given that the model was trained on unfiltered data, this is rather impressive.
+Given these conclusions, the model was retrained on all the training data, and evaluated on the test data to gain a concrete idea of the model's real-world performance. The final model accuracy was quoted at 74.2\%. Given the limited size of the dataset and lack of hyperparameter tuning, this is satisfactory.
 
 % ----------------------------------------------------
 \ifstandalone

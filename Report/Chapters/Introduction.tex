@@ -1,10 +1,23 @@
 % ----------------------------------------------------
 % Introduction
 % ----------------------------------------------------
+\documentclass[class=report,11pt,crop=false]{standalone}
+\input{../Style/ChapterStyle.tex}
+\input{../FrontMatter/Glossary.tex}
+\begin{document}
+\ifstandalone
+\tableofcontents
+\fi
 \section{Introduction}
 
 The aim of this task was to create an image classification Machine Learning (ML) program that can distinguish between four different instruments - Piano, Snare, Trumpet, and Violin. The report follows a methodical approach proposed by Vimal et al. \cite{Vimal_2021}, which involved data collection, feature extraction, machine learning model construction, testing, and results.
 
-The report outline includes conducting a literature review to engage with existing research and scholarly work relating to the task, with the objective of improving insight into the most effective methods of feature extraction and recommended ML models pertinent to this task. What followed was a discussion on the methods of data collection, after which different methods of feature extraction, such as spectrograms (with different windowing methods) and Mel-Frequency Cepstral Coefficients (MFCCs), were explored. The choice of ML model was then explained. With a clear understanding of methodologies, the core objective of testing was formulated - which included an examination of a shallower and deeper ML model and analysis of the different methods of feature extraction. The results were then displayed and analysed, leading to a final verdict which verified the findings. 
+The report outline includes conducting a literature review to engage with existing research and scholarly work relating to the task, with the objective of improving insight into the most effective methods of feature extraction and recommended ML models pertinent to this task. What followed was a discussion on the methods of data collection, after which different methods of feature extraction, such as spectrograms (with different windowing methods) and Mel-Frequency Cepstral Coefficients (MFCCs), were explored. The choice of ML model was then explained. With a clear understanding of methodologies, the core objective of testing was formulated - which included an examination of a shallower and deeper ML model and analysis of the different methods of feature extraction. The results were then displayed and analysed, leading to a final verdict which verified the findings. The conclusion summarises the findings of the task and assesses the model's ability to perform in the real-world.
 
-The conclusion summarises the findings of the task and assesses the model's ability to perform in the real-world.
+% ----------------------------------------------------
+\ifstandalone
+\bibliography{../Bibliography/References.bib}
+\printnoidxglossary[type=\acronymtype,nonumberlist]
+\fi
+\end{document}
+% ---------------------------------------------------
