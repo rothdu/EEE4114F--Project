@@ -15,12 +15,132 @@
 \vspace{0.5cm}
 % ----------------------------------------------------
 
-Here we tested ... 
+\subsection{How significant is the effect of spectral leakage on the performance of the model?}
 
-In order to validate the performance of the model, k-fold cross-validation was used. It tests the robustness of the model against unseen data. This is done by repeatedly training and testing the model with different subsets of the given data. This reduces overfitting. The data is used very efficiently, which is useful here since the dataset is so small, by making sure that each data point is included in the test set once and the training set k-1 times. 
 
-The validation method also gives an accurate method on the performance evaluation, since the average performance in k iterations is good enough to assess the models performance on new data. 
+\subsection{Does the depth of the neural network affect the model performance when spectrograms of different windowing methods are applied?}
 
+\subsection{Is the model performance better if MFCCs are used as input features?}
+
+
+As discussed in section \ref{ch:Feature_Extraction}, A set of spectrograms were generated when each windowing method was applied to the datasets. In total there were three sets of spectrograms. Each set of spectrograms was passed through a shallow and deeper Convolution Neural Network, with the data shown in figure \ref{fig:SpecCNN}. ***We need to explain the shallow and deeper algorithm here***
+
+\begin{figure}[hbt!]
+    \begin{subfigure}[b]{0.5\textwidth}
+        \includegraphics[width=\linewidth]{Images/rectangularSimple.png}
+        \caption{Rectangular filter applied to data passed through a shallow CNN}
+        \label{fig:RectShallow}
+    \end{subfigure}
+    \hfill
+    \begin{subfigure}[b]{0.5\textwidth}
+        \includegraphics[width=\linewidth]{Images/rectangularComplex.png}
+        \caption{Rectangular filter applied to data passed through a deeper CNN}
+        \label{fig:RectDeeper}
+    \end{subfigure}
+    \hfill
+    \begin{subfigure}[b]{0.5\textwidth}
+        \includegraphics[width=\linewidth]{Images/hannSimple.png}
+        \caption{Hann filter applied to data passed through a shallow CNN}
+        \label{fig:HannShallow}
+    \end{subfigure}
+    \hfill
+    \begin{subfigure}[b]{0.5\textwidth}
+        \includegraphics[width=\linewidth]{Images/hannComplex.png}
+        \caption{Hann filter applied to data passed through a deeper CNN}
+        \label{fig:HannDeeper}
+    \end{subfigure}
+    \hfill
+    \begin{subfigure}[b]{0.5\textwidth}
+        \includegraphics[width=\linewidth]{Images/blackmanSimple.png}
+        \caption{Blackman filter applied to data passed through a shallow CNN}
+        \label{fig:BlackmanShallow}
+    \end{subfigure}
+    \hfill
+    \begin{subfigure}[b]{0.5\textwidth}
+        \includegraphics[width=\linewidth]{Images/blackmanComplex.png}
+        \caption{Blackman filter applied to data passed through a deeper CNN}
+        \label{fig:BlackmanDeeper}
+    \end{subfigure}
+    \caption{Result after Spectrograms were passed through neural networks of variable depth}
+    \label{fig:SpecCNN}
+\end{figure}
+
+The graphs show the training and validation losses as the number of model iterations increase. After running 25 epochs with the learning rate set to 0.001 for the model, it could be seen that overfitting was present regardless of the windowing method applied of depth of Neural Network. In Figures \ref{fig:RectShallow}, \ref{fig:HannShallow}, and \ref{fig:BlackmanShallow}, which are the results from a shallow CNN, shows range of model iterations where the model is perfectly fit is around 50 to 100 iterations. The graphs showing the results from the deeper CNN indicate that the model took longer to reach the point where it could be regarded as perfectly fit, being only around 150 to 200 model iterations, as shown in figures \ref{fig:RectDeeper}, \ref{fig:HannDeeper}, and \ref{fig:BlackmanDeeper}. Any model iterations thereafter results in overfitting. This makes perfect sense. Training a deeper neural network in general should take longer to train due to more parameters having to be learnt, since the deeper networks have more layers where the learning process involves an interative process of adjusting the the learning parameters in an attempt to improve model accuracy, as well as increased complexity. Deeper neural networks are also more likely to experience problems relating to vanishing and exploding gradient. This tends to happens to gradients when they are passed through multiple layers of learning during the training process, slowing it down.
+
+What was interesting was in figure \ref{fig:BlackmanShallow}, there was a fluctuation of both the training and test between 125 and 175 training iterations. This was probably as a result of certain weights in the neural network becoming unstable. 
+
+To assess the significance of spectral leakage, the mean accuracy for the shallow and deeper CNN was found between 50-100 and 150-200 model iterations respectively. The result can be summarised in Table \ref{tab:Mean_Acc}. 
+
+\begin{table}[h]
+\centering
+\begin{tabular}{|l|l|}
+\hline
+\textbf{Window and Network Depth} & \textbf{Mean Accuracy (\%)} \\
+\hline
+Rectangle Window with Shallow CNN \ref{fig:RectShallow} & 67.63 \\
+Rectangle Window with Deeper CNN \ref{fig:RectDeeper} & 81.30 \\
+Hann Window with Shallow CNN \ref{fig:HannShallow} & 78.52 \\
+Hann Window with Deeper CNN \ref{fig:HannDeeper} & 80.33 \\
+Blackman Window with Shallow CNN \ref{fig:BlackmanShallow} & 78.52 \\
+Blackman Window with Deeper CNN \ref{fig:BlackmanDeeper} & 80.26 \\
+\hline
+\end{tabular}
+\caption{Mean Accuracy for graphs in Figure \ref{fig:SpecCNN}}
+\label{tab:Mean_Acc}
+\end{table}
+
+Bearing in mind that the rectangle and Blackman window have the worst and best attenuation of spectral leakage respectively, Table \ref{tab:Mean_Acc} shows that degree of spectral leakage attenuation affects the performance of shallower CNNs. The CNN model that is trained on the data that was processed with the rectangular window had poorer performance in comparison to the same data processed with Blackman and Hann windows. This shows a direct link between spectral leakage and the model accuracy. The models trained with data that was processed with the Blackman and Hann windows performed with the same accuracy. This was expected since both windows are great in limiting spectral leakage, and reducing the variability of the model. 
+
+For the same analysis on deeper CNNs, the result were vastly different. The model trained on data processed with a rectangular window performed better than models trained with data processed with either the Blackman or Hanning window. The reason for this could have been because of added complexity and the ability of the model to learn more intricate features in the data. The rectangular window had the best frequency resolution of the three windows, so perhaps in a deeper CNN this could be preferred over spectral leakage. Smoother, more fine grained frequency details are more important for a deeper CNN. 
+
+Shallow CNNs, which are far more computationally efficient and require fewer iterations to become perfectly fit, still has room for improvement, specifically when it comes to the performance of the model on unseen data. This is why k-fold cross-validation is used. 
+
+K-fold cross-validation is a is very powerful when it comes to assessing the model's performance on unseen data. The dataset is divided into 'k' subsets referred to as folds. The model is trained 'k' times and uses 'k-1' folds for training and '1' fold for validation. This would provide a more comprehensive result on the model performance. 
+
+By applying this to the shallow CNN trained with the data processed with various windowing methods, it provides a guide as to which model parameters to tune. 
+
+Figure \ref{fig:K-Fold} shows the mean, min and standard deviation of the k-fold window type analysis. Table \ref{tab:k-fold-average} then gives the accuracy of the last 5 k-fold iterations. 
+
+\begin{figure}[hbt!]
+    \begin{subfigure}[b]{0.5\textwidth}
+        \includegraphics[width=\linewidth]{Images/kfoldMean.png}
+        \caption{Mean k-fold validation results}
+        \label{fig:KMean}
+    \end{subfigure}
+    \hfill
+    \begin{subfigure}[b]{0.5\textwidth}
+        \includegraphics[width=\linewidth]{Images/kfoldMinimum.png}
+        \caption{Minimum k-fold validation results}
+        \label{fig:KMin}
+    \end{subfigure}
+    \hfill
+    \begin{subfigure}[b]{0.5\textwidth}
+        \includegraphics[width=\linewidth]{Images/kfoldStandard Deviation.png}
+        \caption{Standard deviation k-fold results}
+        \label{fig:KStd}
+    \end{subfigure}
+    \caption{Graphical Representation of K-Fold Cross Validation Results}
+    \label{fig:K-Fold}
+\end{figure}
+ 
+\begin{table}[h]
+\centering
+\begin{tabular}{|l|l|}
+\hline
+\textbf{Window} & \textbf{k-fold accuracies (\%)} \\
+\hline
+Rectangle & [77.04 80.75 83.77 68.30 77.74] \\
+Blackman & [85.19 76.98 70.19 72.45 67.17] \\
+Hann & [74.81 75.85 73.96 73.21 79.25] \\
+\hline
+\end{tabular}
+\caption{k-fold validation data for the last 5 k-fold iterations}
+\label{tab:k-fold-average}
+\end{table}
+
+Figures \ref{fig:KMean} and \ref{fig:KMin} shows that the model trained with data processed with the rectangular window had the highest average accuracy in comparison to the data processed with the Blackman and Hann windows. Although, the data processed with the Hann window was not far off comparison. The model trained with data processed with the Blackman window did not perform as well as it was expected to. This shows that the higher frequency resolution associated with rectangular windows had an effect on the performance of shallow CNNs. The features extracted could likely be less affected by spectral leakage. 
+
+Figure \ref{fig:KStd} told a completely different story. Even though the model trained with data processed with the rectangular window had the best overall accuracy, the variability was the the highest, looking at the region of model iterations between 50 and 100. The other models had less variability. 
 
 % ----------------------------------------------------
 % \ifstandalone
