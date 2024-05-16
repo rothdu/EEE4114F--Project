@@ -6,8 +6,11 @@ Instrument classification using convolutional neural networks on audio spectrogr
 ## Navigating this repository
 
 Honestly, I don't really recommend navigating this repository. As is probably evident, by the end of the project, the folder structure was a bit of a mess. That being said - if you really want to:
+
 Code: contains various pieces of code for generating spectrograms and other forms of feature extraction, as well as implementing the machine learning algorithms. The most interesting notebooks are probably spectrograms.ipynb (spectrogram generation) and learning.ipynb (machine learning algorithms).
+
 Training-data and Test-data: Arguably the most interesting folders to look at - contain the sounds, spectrograms, and MFCCs used in the process of developing the model. Sounds were largely taken from freesound.org and pixabay.com. Piano sounds were recorded from Helm tytel.org/helm/, an open-source digital synthesizer.
+
 Report: LaTeX source code for the report. Final pdf is viewable in the main repository of the project.
 
 ## A note on inspiration and plagiarism
