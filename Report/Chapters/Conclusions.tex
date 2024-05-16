@@ -1,4 +1,29 @@
 % ----------------------------------------------------
 % Conclusions
 % ----------------------------------------------------
+
+
+\documentclass[class=report,11pt,crop=false]{standalone}
+\input{../Style/ChapterStyle.tex}
+\input{../FrontMatter/Glossary.tex}
+\begin{document}
+\ifstandalone
+\tableofcontents
+\fi
 \section{Conclusions \label{ch:conclusions}}
+
+
+... something about how rectangular on the simple model was the best
+
+Following this conclusion, the model was retrained on all the training data, and evaluated on the test data to gain a concrete idea of the model's real-world performance. The final model accuracy was 74.2\%.
+
+
+
+
+% ----------------------------------------------------
+\ifstandalone
+\bibliography{../Bibliography/References.bib}
+\printnoidxglossary[type=\acronymtype,nonumberlist]
+\fi
+\end{document}
+% ----------------------------------------------------
