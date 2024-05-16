@@ -15,10 +15,10 @@
 
 
 
-\subsection{Is the model performance better if MFCCs are used as input features?}
 
 
-\subsection{Comparing depth of neural networks}
+
+\subsection{Comparing depth of neural networks} \label{ss:networkdepths}
 
 As discussed in section \ref{ch:Feature_Extraction}, A set of spectrograms were generated when each windowing method was applied to the datasets. In total there were three sets of spectrograms. Each set of spectrograms was passed through a shallow and deeper CNN, with the data shown in figure \ref{fig:SpecCNN}.
 
@@ -72,7 +72,7 @@ A limitation of this comparison came from the splitting of data; the single trai
 
 
 
-\subsection{Comparing windowing types}
+\subsection{Comparing windowing types} \label{ss:windowtypes}
 
 
 
@@ -94,7 +94,7 @@ By applying this to the shallow CNN trained with the data processed with various
 
 Figure \ref{fig:K-Fold} shows the mean, min and standard deviation of the k-fold window type analysis. Table \ref{tab:k-fold-average} then gives the accuracy of the last 5 k-fold iterations. 
 
-\begin{figure}[hbt!]
+\begin{figure}[ht]
     \begin{subfigure}[b]{0.5\textwidth}
         \includegraphics[width=\linewidth]{Images/kfoldMean.png}
         \caption{Mean k-fold validation results}
@@ -134,6 +134,31 @@ Hann & [69.3 78.7 70.9 73.9 77.9] \\
 Figures \ref{fig:KMean} and \ref{fig:KMin} shows that the model trained with data processed with the rectangular window had the highest average accuracy in comparison to the data processed with the Blackman and Hann windows. Although, the data processed with the Hann window was not far off comparison. The model trained with data processed with the Blackman window did not perform as well as it was expected to. This shows that the higher frequency resolution associated with rectangular windows had an effect on the performance of shallow CNNs. The features extracted could likely be less affected by spectral leakage. 
 
 Figure \ref{fig:KStd} told a completely different story. Even though the model trained with data processed with the rectangular window had the best overall accuracy, the variability was the the highest, looking at the region of model iterations between 50 and 100. The other models had less variability. 
+
+
+\subsection{Analysis of MFCCs}
+
+As explained in section \ref{ch:Objective}, additional analysis was performed on MFCCs with the standard `shallow' network, and a modified `shallow' network which featured horizontal (time-only) convolutional kernels and no max-pooling stage. The results using a single training-validation split are shown in Figure \ref{fig:mfcc}. The results do seem to indicate better validation performance from the customised model, shown from the lower final validation loss. While a limited amount of overfitting is evident for both networks, it does not seem to be a prevalent issue. However as in subsection \ref{ss:networkdepths}, the single-split used means that this could be quite dependent on the specific split of the data.
+
+\begin{figure}[ht]
+    \begin{subfigure}[b]{0.5\textwidth}
+        \includegraphics[width=\linewidth]{Images/mfccSimple.png}
+        \caption{Standard `shallow' network}
+        \label{fig:mfccshallow}
+    \end{subfigure}
+    \hfill
+    \begin{subfigure}[b]{0.5\textwidth}
+        \includegraphics[width=\linewidth]{Images/mfccCustom.png}
+        \caption{Network with horizontal kernels}
+        \label{fig:mfcccustom}
+    \end{subfigure}
+    \hfill
+    \caption{Comparison of CNNs for MFCCs}
+    \label{fig:mfcc}
+\end{figure}
+
+A K-fold analysis of both networks as described in subsection \ref{ss:windowtypes} was performed on both to find validation accuracy. The mean was found to be 74.2\%, and the minimum across the 5 folds 68.3\%. This is comparable to the results using spectrograms, and it can be concluded that this model did not benefit substantially from the use of MFCCs in place of spectrograms.
+
 
 % ----------------------------------------------------
 \ifstandalone
