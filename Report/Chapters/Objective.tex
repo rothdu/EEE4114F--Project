@@ -1,0 +1,33 @@
+% ----------------------------------------------------
+% Literature Review
+% ----------------------------------------------------
+% \documentclass[class=report,11pt,crop=false]{standalone}
+% \input{../Style/ChapterStyle.tex}
+% \input{../FrontMatter/Glossary.tex}
+% \begin{document}
+% \ifstandalone
+% \tableofcontents
+% \fi
+% % ----------------------------------------------------
+\section{Core Objective \label{ch:Objective}}
+% \epigraph{If you wish to make an apple pie from scratch, you must first invent the universe.}%
+%     {\emph{---Carl Sagan}}
+\vspace{0.5cm}
+% ----------------------------------------------------
+
+In sections \ref{ch:Feature_Extraction} and \ref{ch:ML_Methods}, a general hypothesis was outlines regarding the specific questions that should be answered in section \ref{ch:T_R}. 
+
+\begin{itemize}
+    \item How significant is the effect of spectral leakage on the performance of the model? Since the different windowing methods attenuate the spectral leakage to different degrees, perhaps frequency resolution could be seen as irrelevant, with a need to prioritise spectral leakage.
+    \item Does the depth of the neural network affect the model performance when spectrograms of different windowing methods are applied? A deeper algorithm is often more complex and tunes the parameters finer which could result in overfitting, while a simpler algorithm would be more computationally efficient but would perform poorly in comparison to a deeper algorithm. 
+    \item Is the model performance of both the shallow and deeper neural network better if the MFCCs are used as input features in comparison to the spectrogram with the overall best windowing method applied? MFCCs were seen to have a lower pixel count (20x94) than spectrograms. 
+\end{itemize}
+
+
+% ----------------------------------------------------
+% \ifstandalone
+% \bibliography{../Bibliography/References.bib}
+% \printnoidxglossary[type=\acronymtype,nonumberlist]
+% \fi
+% \end{document}
+% ----------------------------------------------------
